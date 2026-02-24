@@ -1,3 +1,4 @@
+//interview r rejected er list joma korar jonno 
 let interviewList = [];
 let rejectedList = [];
 let currentStatus = 'all';
@@ -15,6 +16,7 @@ const mainContainer = document.querySelector('main');
 const filterSection = document.getElementById('filtered-section');
 const tabJobCount = document.getElementById('tab-job-count');
 
+//screen e j number dekbo ta update er jonno
 function calculateCount() {
     total.innerText = allCardSection.children.length;
     interviewCount.innerText = interviewList.length;
@@ -75,7 +77,8 @@ mainContainer.addEventListener('click', function (event) {
         parenNode.querySelector('.status').innerText = 'Status: Interview';
 
         const jobInfo = { companyName, position, location, type, salary, description, status: 'Interview' };
-
+        
+        // Job ta interviewList array te add korlam
         const jobExist = interviewList.find(item => item.companyName == jobInfo.companyName && item.position == jobInfo.position);
 
         if (!jobExist) {
