@@ -1,4 +1,4 @@
-//interview r rejected er list joma korar jonno 
+// interview r rejected er list joma korar jonno 
 let interviewList = [];
 let rejectedList = [];
 let currentStatus = 'all';
@@ -16,13 +16,23 @@ const mainContainer = document.querySelector('main');
 const filterSection = document.getElementById('filtered-section');
 const tabJobCount = document.getElementById('tab-job-count');
 
-//screen e j number dekbo ta update er jonno
+// ekek job er jonno ek ek colour
+function getTypeColor(type) {
+    const typeLower = type.toLowerCase();
+    if (typeLower.includes('full-time')) return 'bg-pink-200';
+    if (typeLower.includes('contract')) return 'bg-purple-200';
+    if (typeLower.includes('hybrid')) return 'bg-orange-200';
+    if (typeLower.includes('part-time')) return 'bg-purple-200';
+    return 'bg-gray-200'; // Default color
+}
+
+// screen e j number dekbo ta update er jonno
 function calculateCount() {
     total.innerText = allCardSection.children.length;
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
 
-    if (currentStatus === 'all-filter-btn') {
+    if (currentStatus === 'all-filter-btn' || currentStatus === 'all') {
         tabJobCount.innerText = allCardSection.children.length;
     } else if (currentStatus === 'interview-filter-btn') {
         tabJobCount.innerText = interviewList.length;
@@ -78,7 +88,6 @@ mainContainer.addEventListener('click', function (event) {
 
         const jobInfo = { companyName, position, location, type, salary, description, status: 'Interview' };
         
-        // Job ta interviewList array te add korlam
         const jobExist = interviewList.find(item => item.companyName == jobInfo.companyName && item.position == jobInfo.position);
 
         if (!jobExist) {
@@ -156,16 +165,16 @@ function renderInterview() {
         div.innerHTML = `
             <div class="space-y-3">
                 <div>
-                    <p class="companyName text-blue-900 font-bold">${job.companyName}</p>
+                    <p class="companyName text-blue-900 text-3xl font-bold">${job.companyName}</p>
                     <p class="position">${job.position}</p>
                 </div>
                 <div class="flex flex-wrap gap-2 text-xs md:text-sm">
                     <p class="location bg-gray-200 px-3 md:px-5">${job.location}</p>
-                    <p class="type bg-gray-200 px-3 md:px-5">${job.type}</p>
+                    <p class="type ${getTypeColor(job.type)} px-3 md:px-5">${job.type}</p>
                     <p class="salary bg-gray-200 px-3 md:px-5">${job.salary}</p>
                 </div>
-                <p class="description text-gray-600 text-sm">${job.description}</p>
-                <p class="status text-gray-400 italic text-xs">Status: ${job.status}</p>
+                <p class="description text-gray-600 font-semibold text-sm">${job.description}</p>
+                <p class="status text-gray-400 font-serif text-xs">Status: ${job.status}</p>
                 <div class="flex gap-4">
                     <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
                     <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
@@ -198,16 +207,16 @@ function renderRejected() {
         div.innerHTML = `
             <div class="space-y-3">
                 <div>
-                    <p class="companyName text-blue-900 font-bold">${job.companyName}</p>
+                    <p class="companyName text-blue-900 text-3xl font-bold">${job.companyName}</p>
                     <p class="position">${job.position}</p>
                 </div>
                 <div class="flex flex-wrap gap-2 text-xs md:text-sm">
                     <p class="location bg-gray-200 px-3 md:px-5">${job.location}</p>
-                    <p class="type bg-gray-200 px-3 md:px-5">${job.type}</p>
+                    <p class="type ${getTypeColor(job.type)} px-3 md:px-5">${job.type}</p>
                     <p class="salary bg-gray-200 px-3 md:px-5">${job.salary}</p>
                 </div>
-                <p class="description text-gray-600 text-sm">${job.description}</p>
-                <p class="status text-gray-400 italic text-xs">Status: ${job.status}</p>
+                <p class="description text-gray-600 font-semibold text-sm">${job.description}</p>
+                <p class="status text-gray-400 font-serif text-xs">Status: ${job.status}</p>
                 <div class="flex gap-4">
                     <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
                     <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
