@@ -152,8 +152,8 @@ function renderInterview() {
             <div class="flex flex-col items-center justify-center py-10 space-y-4">
                 <img src="https://github.com/ProgrammingHero1/B13-A4-PH-Job-Tracker/blob/main/jobs.png?raw=true" alt="No jobs" class="w-24 h-24 object-contain">
                 <div class="text-center">
-                    <h3 class="text-xl font-bold">No Jobs Available</h3>
-                    <p class="text-gray-500 text-sm">Your interview list is currently empty.</p>
+                    <h3 class="text-xl font-bold">No interviews have been conducted yet.</h3>
+                    <p class="text-gray-500 text-sm">Empty List.</p>
                 </div>
             </div>`;
         return;
@@ -195,7 +195,7 @@ function renderRejected() {
                 <img src="https://github.com/ProgrammingHero1/B13-A4-PH-Job-Tracker/blob/main/jobs.png?raw=true" alt="No jobs" class="w-24 h-24 object-contain">
                 <div class="text-center">
                     <h3 class="text-xl font-bold">No Jobs Available</h3>
-                    <p class="text-gray-500 text-sm">No rejected applications to show.</p>
+                    <p class="text-gray-500 text-sm">Applications have not been rejected yet..</p>
                 </div>
             </div>`;
         return;
