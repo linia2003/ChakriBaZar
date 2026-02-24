@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChakriBaZar | Job Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-50 text-slate-900">
+    <header class="w-11/12 md:w-4/5 mx-auto mt-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-cyan-950 mb-4">ChakriBaZar</h1>
+        <div class="grid grid-cols-3 gap-2 md:gap-4">
+            <div class="bg-purple-100 p-2 md:p-3 border border-purple-200">
+                <p class="font-bold text-xs md:text-sm">Total</p>
+                <p id="total" class="text-lg md:text-xl">0</p>
+            </div>
+
+            <div class="bg-green-100 p-2 md:p-3 border border-green-200">
+                <p class="font-bold text-xs md:text-sm">Interview</p>
+                <p id="interviewCount" class="text-lg md:text-xl">0</p>
+            </div>
+
+            <div class="bg-red-100 p-2 md:p-3 border border-red-200">
+                <p class="font-bold text-xs md:text-sm">Rejected</p>
+                <p id="rejectedCount" class="text-lg md:text-xl">0</p>
+            </div>
+        </div>
+    </header>
+
+    <hr class="my-5">
+
+    <main class="w-11/12 md:w-4/5 mx-auto pb-10">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+            <div class="flex gap-2">
+                <button onclick="toggleStyle('all-filter-btn')" class="bg-black text-white px-4 md:px-5 py-2 text-sm md:text-base" id="all-filter-btn">All</button>
+                <button onclick="toggleStyle('interview-filter-btn')" class="bg-gray-300 px-4 md:px-5 py-2 text-sm md:text-base" id="interview-filter-btn">Interview</button>
+                <button onclick="toggleStyle('rejected-filter-btn')" class="bg-gray-300 px-4 md:px-5 py-2 text-sm md:text-base" id="rejected-filter-btn">Rejected</button>
+            </div>
+            <p class="text-gray-500 font-medium text-sm">Listings: <span id="tab-job-count">0</span></p>
+        </div>
+
+        <section id="filtered-section" class="hidden space-y-4">
+        </section>
+
+        <section id="allCards" class="space-y-4">
+            <div class="card flex flex-col md:flex-row justify-between border bg-white p-4 md:p-6 gap-4">
+                <div class="space-y-3">
+                    <div>
+                        <p class="companyName text-blue-900 font-bold">TechFlow Solutions</p>
+                        <p class="position">Frontend Developer</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
+                        <p class="location bg-gray-200 px-3 md:px-5">Dhaka, BD</p>
+                        <p class="type bg-gray-200 px-3 md:px-5">Full-time</p>
+                        <p class="salary bg-gray-200 px-3 md:px-5">TK 60,000 - 85,000</p>
+                    </div>
+                    <p class="description text-gray-600 text-sm">Building responsive React dashboards for fintech clients using modern state management.</p>
+                    <p class="status text-gray-400 italic text-xs">Pending</p>
+                    <div class="flex gap-4">
+                        <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
+                        <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
+                    </div>
+                </div>
+                <div class="flex md:block justify-end">
+                    <button class="btn-delete bg-rose-100 text-rose-600 px-4 py-2 text-sm">Delete</button>
+                </div>
+            </div>
+
+            <div class="card flex flex-col md:flex-row justify-between border bg-white p-4 md:p-6 gap-4">
+                <div class="space-y-3">
+                    <div>
+                        <p class="companyName text-blue-900 font-bold">Creative Pulse</p>
+                        <p class="position">UI/UX Designer</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
+                        <p class="location bg-gray-200 px-3 md:px-5">Chattogram, BD</p>
+                        <p class="type bg-gray-200 px-3 md:px-5">Contract</p>
+                        <p class="salary bg-gray-200 px-3 md:px-5">TK 45,000 - 55,000</p>
+                    </div>
+                    <p class="description text-gray-600 text-sm">Designing high-fidelity prototypes for mobile health applications and fitness trackers.</p>
+                    <p class="status text-gray-400 italic text-xs">Pending</p>
+                    <div class="flex gap-4">
+                        <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
+                        <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
+                    </div>
+                </div>
+                <div class="flex md:block justify-end">
+                    <button class="btn-delete bg-rose-100 text-rose-600 px-4 py-2 text-sm">Delete</button>
+                </div>
+            </div>
+
+            <div class="card flex flex-col md:flex-row justify-between border bg-white p-4 md:p-6 gap-4">
+                <div class="space-y-3">
+                    <div>
+                        <p class="companyName text-blue-900 font-bold">GreenGrid Energy</p>
+                        <p class="position">Data Analyst</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
+                        <p class="location bg-gray-200 px-3 md:px-5">Austin, TX</p>
+                        <p class="type bg-gray-200 px-3 md:px-5">Full-time</p>
+                        <p class="salary bg-gray-200 px-3 md:px-5">$75,000 - $95,000</p>
+                    </div>
+                    <p class="description text-gray-600 text-sm">Analyzing solar grid efficiency patterns and providing actionable data insights for green energy.</p>
+                    <p class="status text-gray-400 italic text-xs">Pending</p>
+                    <div class="flex gap-4">
+                        <button class="interview-btn bg-green-300 px-4 py-2 text-sm">Interview</button>
+                        <button class="rejected-btn bg-red-300 px-4 py-2 text-sm">Rejected</button>
+                    </div>
+                </div>
+                <div class="flex md:block justify-end">
+                    <button class="btn-delete bg-rose-100 text-red-600 px-4 py-2 text-sm">Delete</button>
+                </div>
+            </div>
+
+            <div class="card flex flex-col md:flex-row justify-between border bg-white p-4 md:p-6 gap-4">
+                <div class="space-y-3">
+                    <div>
+                        <p class="companyName text-blue-900 font-bold">Swift Logistics</p>
+                        <p class="position">Backend Engineer</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
+                        <p class="location bg-gray-200 px-3 md:px-5">Chicago, IL</p>
+                        <p class="type bg-gray-200 px-3 md:px-5">Hybrid</p>
+                        <p class="salary bg-gray-200 px-3 md:px-5">$120,000 - $140,000</p>
+                    </div>
+                    <p class="description text-gray-600 text-sm">Scaling Node.js microservices for real-time fleet tracking and logistics optimization.</p>
+                    <p class="status text-gray-400 italic text-xs">Pending</p>
+                    <div class="flex gap-4">
+                        <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
+                        <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
+                    </div>
+                </div>
+                <div class="flex md:block justify-end">
+                    <button class="btn-delete bg-rose-100 text-rose-600 px-4 py-2 text-sm">Delete</button>
+                </div>
+            </div>
+
+            <div class="card flex flex-col md:flex-row justify-between border bg-white p-4 md:p-6 gap-4">
+                <div class="space-y-3">
+                    <div>
+                        <p class="companyName text-blue-900 font-bold">EduSpark</p>
+                        <p class="position">Product Manager</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
+                        <p class="location bg-gray-200 px-3 md:px-5">Remote</p>
+                        <p class="type bg-gray-200 px-3 md:px-5">Full-time</p>
+                        <p class="salary bg-gray-200 px-3 md:px-5">$110,000 - $130,000</p>
+                    </div>
+                    <p class="description text-gray-600 text-sm">Leading the roadmap for e-learning tools focused on interactive K-12 educational content.</p>
+                    <p class="status text-gray-400 italic text-xs">Pending</p>
+                    <div class="flex gap-4">
+                        <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
+                        <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
+                    </div>
+                </div>
+                <div class="flex md:block justify-end">
+                    <button class="btn-delete bg-rose-100 text-rose-600 px-4 py-2 text-sm">Delete</button>
+                </div>
+            </div>
+
+            <div class="card flex flex-col md:flex-row justify-between border bg-white p-4 md:p-6 gap-4">
+                <div class="space-y-3">
+                    <div>
+                        <p class="companyName text-blue-900 font-bold">CyberShield</p>
+                        <p class="position">Security Consultant</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
+                        <p class="location bg-gray-200 px-3 md:px-5">Washington DC</p>
+                        <p class="type bg-gray-200 px-3 md:px-5">Full-time</p>
+                        <p class="salary bg-gray-200 px-3 md:px-5">$130,000 - $150,000</p>
+                    </div>
+                    <p class="description text-gray-600 text-sm">Conducting penetration tests and advising clients on cloud infrastructure security protocols.</p>
+                    <p class="status text-gray-400 italic text-xs">Pending</p>
+                    <div class="flex gap-4">
+                        <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
+                        <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
+                    </div>
+                </div>
+                <div class="flex md:block justify-end">
+                    <button class="btn-delete bg-rose-100 text-rose-600 px-4 py-2 text-sm">Delete</button>
+                </div>
+            </div>
+
+            <div class="card flex flex-col md:flex-row justify-between border bg-white p-4 md:p-6 gap-4">
+                <div class="space-y-3">
+                    <div>
+                        <p class="companyName text-blue-900 font-bold">Urban Market</p>
+                        <p class="position">SEO Specialist</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
+                        <p class="location bg-gray-200 px-3 md:px-5">Remote</p>
+                        <p class="type bg-gray-200 px-3 md:px-5">Part-time</p>
+                        <p class="salary bg-gray-200 px-3 md:px-5">$40,000 - $55,000</p>
+                    </div>
+                    <p class="description text-gray-600 text-sm">Optimizing e-commerce listings for better search visibility and user conversion rates.</p>
+                    <p class="status text-gray-400 italic text-xs">Pending</p>
+                    <div class="flex gap-4">
+                        <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
+                        <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
+                    </div>
+                </div>
+                <div class="flex md:block justify-end">
+                    <button class="btn-delete bg-rose-100 text-rose-600 px-4 py-2 text-sm">Delete</button>
+                </div>
+            </div>
+
+            <div class="card flex flex-col md:flex-row justify-between border bg-white p-4 md:p-6 gap-4">
+                <div class="space-y-3">
+                    <div>
+                        <p class="companyName text-blue-900 font-bold">AeroSpace Lab</p>
+                        <p class="position">Systems Architect</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
+                        <p class="location bg-gray-200 px-3 md:px-5">Denver, CO</p>
+                        <p class="type bg-gray-200 px-3 md:px-5">Full-time</p>
+                        <p class="salary bg-gray-200 px-3 md:px-5">$150,000 - $175,000</p>
+                    </div>
+                    <p class="description text-gray-600 text-sm">Designing high-reliability systems for satellite communication and aerospace data relay.</p>
+                    <p class="status text-gray-400 italic text-xs">Pending</p>
+                    <div class="flex gap-4">
+                        <button class="interview-btn bg-green-200 px-4 py-2 text-sm">Interview</button>
+                        <button class="rejected-btn bg-red-200 px-4 py-2 text-sm">Rejected</button>
+                    </div>
+                </div>
+                <div class="flex md:block justify-end">
+                    <button class="btn-delete bg-rose-100 text-rose-600 px-4 py-2 text-sm">Delete</button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
